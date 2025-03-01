@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html >
+<head>
+    
+    <title>Pastel Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background: linear-gradient(to right, #ffdde1, #ee9ca7, #b5e7ff); /* Soft pastel gradient */
+            color: #fff;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+        .calculator {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #display {
+            width: 100%;
+            height: 60px;
+            font-size: 1.8em;
+            text-align: right;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #ffe5ec; /* Soft pink */
+            color: #333;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            width: 100%;
+            height: 55px;
+            font-size: 1.4em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        button:hover {
+            filter: brightness(90%);
+        }
+        .number {
+            background: #a1c4fd; /* Pastel blue */
+            color: white;
+        }
+        .operator {
+            background: #ffafcc; /* Soft pink */
+            color: white;
+        }
+        .equals {
+            background: #9b5de5; /* Soft purple */
+            color: white;
+        }
+        .clear {
+            background: #ff6961; /* Soft red */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Calculator</h1>
+
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button class="number" onclick="appendNumber('7')">7</button>
+            <button class="number" onclick="appendNumber('8')">8</button>
+            <button class="number" onclick="appendNumber('9')">9</button>
+            <button class="operator" onclick="appendOperator('/')">÷</button>
+
+            <button class="number" onclick="appendNumber('4')">4</button>
+            <button class="number" onclick="appendNumber('5')">5</button>
+            <button class="number" onclick="appendNumber('6')">6</button>
+            <button class="operator" onclick="appendOperator('*')">×</button>
+
+            <button class="number" onclick="appendNumber('1')">1</button>
+            <button class="number" onclick="appendNumber('2')">2</button>
+            <button class="number" onclick="appendNumber('3')">3</button>
+            <button class="operator" onclick="appendOperator('-')">−</button>
+
+            <button class="number" onclick="appendNumber('0')">0</button>
+            <button class="number" onclick="appendNumber('.')">.</button>
+            <button class="equals" onclick="calculate()">=</button>
+            <button class="operator" onclick="appendOperator('+')">+</button>
+
+            <button class="clear" onclick="clearDisplay()">C</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '';
+
+        function appendNumber(number) {
+            currentInput += number;
+            display.value = currentInput;
+        }
+
+        function appendOperator(operator) {
+            if (currentInput !== '' && !isNaN(currentInput[currentInput.length - 1])) {
+                currentInput += operator;
+                display.value = currentInput;
+            }
+        }
+
+        function calculate() {
+            try {
+                currentInput = eval(currentInput);
+                display.value = currentInput;
+            } catch (error) {
+                display.value = 'Error';
+                currentInput = '';
+            }
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            display.value = '';
+        }
+    </script>
+
+</body>
+</html>
+
+
